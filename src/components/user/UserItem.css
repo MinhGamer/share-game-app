@@ -1,0 +1,31 @@
+.user-item {
+  width: 35%;
+  background-color: #b2fefa;
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 7px;
+  display: flex;
+  cursor: pointer;
+}
+
+.user-item:hover {
+  background-color: #ec38bc;
+}
+
+.user-item__info {
+  margin-left: 1.5rem;
+}
+
+.user-item img {
+  width: 30%;
+  border-radius: 50%;
+  height: 50px;
+}
+
+.user-item__name {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+.user-item__places {
+  font-size: 1.3rem;
+}
