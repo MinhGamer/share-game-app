@@ -6,6 +6,7 @@
   border-radius: 7px;
   display: flex;
   cursor: pointer;
+  transition: all 0.3s;
 }
 
 .user-item:hover {
