@@ -1,0 +1,19 @@
+.navlinks {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.navlinks a {
+  font-size: 1.4rem;
+  display: inline-block;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 700;
+  border-radius: 7px;
+  margin: 0 1rem;
+}
+
+.navlinks a.active {
+  color: #ec38bc;
+}
