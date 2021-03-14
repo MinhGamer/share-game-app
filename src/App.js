@@ -4,6 +4,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import UsersPage from './pages/user/UsersPage';
 import GamesPage from './pages/game/GamesPage';
 import AddGamePage from './pages/game/AddGamePage';
+import AuthPage from './pages/user/AuthPage';
 import Header from './shared/components/Navigation/Header';
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
           <Route path='/' exact component={UsersPage} />
           <Route path='/:userId/games' exact component={GamesPage} />
           <Route path='/:userId/add-game' exact component={AddGamePage} />
+          <Route path='/auth' exact component={AuthPage} />
         </BrowserRouter>
       </div>
     </div>

@@ -7,18 +7,26 @@ import './Input.css';
 const inputReducer = (state, action) => {
   switch (action.type) {
     case 'CHANGE': {
+      const [isValid, errorText] = validate(action.val, action.validators);
+
       return {
         ...state,
         value: action.val,
+
         //validate value here
-        isValid: validate(action.val, action.validators),
+        isValid,
+        errorText,
       };
     }
 
     case 'TOUCH': {
+      const [isValid, errorText] = validate(action.val, action.validators);
+
       return {
         ...state,
         isTouched: true,
+        isValid,
+        errorText,
       };
     }
 
@@ -32,6 +40,7 @@ export default function Input(props) {
     value: props.initialValue || '',
     isTouched: false,
     isValid: props.valid || false,
+    errorText: [],
   });
 
   if (props.element === 'textarea') {
@@ -45,8 +54,12 @@ export default function Input(props) {
     });
   };
 
-  const touchHandler = () => {
-    dispatch({ type: 'TOUCH' });
+  const touchHandler = (e) => {
+    dispatch({
+      type: 'TOUCH',
+      val: e.target.value,
+      validators: props.validators,
+    });
   };
 
   const { id, onInput } = props;
@@ -66,6 +79,7 @@ export default function Input(props) {
       <div className={formControlStyle}>
         <label htmlFor={props.id}>{props.label}</label>
         <input
+          type={props.type}
           id={props.id}
           onBlur={touchHandler}
           onChange={changeHandler}
@@ -73,7 +87,9 @@ export default function Input(props) {
         />
         {/* Error text */}
         {inputState.isTouched && !inputState.isValid && (
-          <p className='form-control__error-text'>{props.errorText}</p>
+          <p className='form-control__error-text'>
+            {inputState.errorText.join(' / ')}
+          </p>
         )}
       </div>
     </>

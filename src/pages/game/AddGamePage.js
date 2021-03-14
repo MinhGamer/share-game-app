@@ -2,6 +2,9 @@ import React from 'react';
 
 import Input from '../../shared/components/FormElement/Input';
 import Card from '../../shared/components/UI/Card';
+import Button from '../../shared/components/UI/Button';
+
+import useForm from '../../shared/customHooks/useForm';
 
 import {
   VALIDATOR_MINLENGTH,
@@ -11,8 +14,17 @@ import {
 import './AddGame.css';
 
 export default function AddGamePage() {
-  const inputHandler = (id, value, isValid) => {
-    console.log(id, value, isValid);
+  const [formState, inputHandler] = useForm(
+    {
+      title: { value: '', isValid: false },
+      developer: { value: '', isValid: false },
+    },
+    false
+  );
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    console.log(formState);
   };
 
   return (
@@ -25,32 +37,33 @@ export default function AddGamePage() {
           initialValue=''
           validators={[VALIDATOR_REQUIRE()]}
           onInput={inputHandler}
-          errorText='This field is required'
         />
-        <Input
+        {/* <Input
           id='description'
           label='Description'
           initialValue=''
           validators={[VALIDATOR_MINLENGTH(5)]}
           onInput={inputHandler}
-          errorText='Please enter at least 5 characters'
-        />
-        <Input
+      
+        /> */}
+        {/* <Input
           id='developer'
           label='Developer'
           initialValue=''
           validators={[VALIDATOR_REQUIRE()]}
           onInput={inputHandler}
-          errorText='This field is required'
-        />
-        <Input
+        /> */}
+        {/* <Input
           id='publisher'
           label='Publisher'
           initialValue=''
           validators={[VALIDATOR_REQUIRE()]}
           onInput={inputHandler}
-          errorText='This field is required'
-        />
+    
+        /> */}
+        <Button disabled={!formState.isValid} green onClick={submitHandler}>
+          Submit
+        </Button>
       </Card>
     </form>
   );

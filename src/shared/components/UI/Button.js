@@ -10,21 +10,24 @@ export default function Button(props) {
   const buttonGreen = props.green && 'button--green';
 
   //join all color to a single string
-  const buttonColors = [buttonBlue, buttonRed, buttonGreen].join(' ');
+  const buttonStyles = ['button', buttonBlue, buttonRed, buttonGreen].join(' ');
 
   if (props.to) {
     return (
       <Link
         to={props.to}
         exact={props.exact}
-        className={`button ${buttonColors} ${props.className} `}>
+        className={` ${buttonStyles} ${props.className} `}>
         {props.children}
       </Link>
     );
   }
 
   return (
-    <button className={`button ${buttonColors} ${props.className} `}>
+    <button
+      disabled={props.disabled}
+      onClick={props.onClick}
+      className={` ${buttonStyles} ${props.className} `}>
       {props.children}
     </button>
   );

@@ -15,6 +15,9 @@ export default function NavLinks() {
       <NavLink exact to='/u1/add-game'>
         Add Game
       </NavLink>
+      <NavLink exact to='/auth'>
+        Auth
+      </NavLink>
     </div>
   );
 }
