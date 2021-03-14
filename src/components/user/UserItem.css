@@ -4,9 +4,19 @@
   margin: 1rem;
   padding: 1rem;
   border-radius: 7px;
-  display: flex;
   cursor: pointer;
   transition: all 0.3s;
+}
+
+.user-item a {
+  text-decoration: none;
+  color: #000000;
+  display: flex;
+}
+
+.user-item a:focus {
+  outline: none;
+  color: none;
 }
 
 .user-item:hover {
