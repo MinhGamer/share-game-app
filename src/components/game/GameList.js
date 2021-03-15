@@ -34,13 +34,11 @@ export default function GameList(props) {
     setCurrentPage(currentPage - 1);
   };
 
-  console.log(currentPage);
-
   const renderPageNumbers = () => {
     const pageArr = [];
 
     for (let i = -1; i < PAGE_NUMBER_PER_PAGE - 1; i++) {
-      const pageNumber = currentPage + i;
+      let pageNumber = currentPage + i;
 
       if (pageNumber > numberOfPages || pageNumber === 0) {
         continue;
@@ -57,6 +55,10 @@ export default function GameList(props) {
           {pageNumber}
         </span>
       );
+    }
+
+    if (currentPage > numberOfPages - PAGE_NUMBER_PER_PAGE / 2) {
+      pageArr.unshift(<span className='page-number__item'>...</span>);
     }
 
     if (currentPage < numberOfPages - PAGE_NUMBER_PER_PAGE / 2) {
