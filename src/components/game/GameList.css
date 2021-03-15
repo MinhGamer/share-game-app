@@ -3,18 +3,40 @@
   margin: auto;
 }
 
+.game-list .page-number {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+  font-size: 1.8rem;
+}
+
+.game-list .page-number__item {
+  margin: 0 1rem;
+  cursor: pointer;
+  color: white;
+}
+
+.game-list .page-number__item--active {
+  margin: 0 1rem;
+  color: #4286f4;
+  border: 2px solid #4286f4;
+  padding: 0.1rem 0.5rem;
+  cursor: pointer;
+}
+
 .pagination-arrow {
   position: fixed;
-  font-size: 2rem;
+  font-size: 2.3rem;
   z-index: 30;
   top: 50%;
   cursor: pointer;
 }
 
 .pagination-arrow--left {
-  left: 5%;
+  left: 6%;
 }
 
 .pagination-arrow--right {
-  right: 5%;
+  right: 6%;
 }
