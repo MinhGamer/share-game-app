@@ -8,9 +8,16 @@ export default function Button(props) {
   const buttonBlue = props.blue && 'button--blue';
   const buttonRed = props.red && 'button--red';
   const buttonGreen = props.green && 'button--green';
+  const buttonBlack = props.black && 'button--black';
 
   //join all color to a single string
-  const buttonStyles = ['button', buttonBlue, buttonRed, buttonGreen].join(' ');
+  const buttonStyles = [
+    'button',
+    buttonBlue,
+    buttonRed,
+    buttonGreen,
+    buttonBlack,
+  ].join(' ');
 
   if (props.to) {
     return (

@@ -1,6 +1,6 @@
 import './App.css';
 
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import UsersPage from './pages/user/UsersPage';
 import GamesPage from './pages/game/GamesPage';
 import AddGamePage from './pages/game/AddGamePage';

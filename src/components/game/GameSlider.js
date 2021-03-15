@@ -29,8 +29,6 @@ export default function GameSlider() {
     );
   };
 
-  console.log(currentSlider);
-
   return (
     <div className='game-slider'>
       <FaArrowCircleLeft
