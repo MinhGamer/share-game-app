@@ -2,3 +2,19 @@
   width: 90%;
   margin: auto;
 }
+
+.pagination-arrow {
+  position: fixed;
+  font-size: 2rem;
+  z-index: 30;
+  top: 50%;
+  cursor: pointer;
+}
+
+.pagination-arrow--left {
+  left: 5%;
+}
+
+.pagination-arrow--right {
+  right: 5%;
+}

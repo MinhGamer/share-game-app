@@ -33,8 +33,6 @@ export default function GameItem(props) {
     setShowTrailer(true);
   };
 
-  console.log('rendering');
-
   return (
     <>
       {/* Delete Modal */}
