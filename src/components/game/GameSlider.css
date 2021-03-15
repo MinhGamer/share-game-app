@@ -1,0 +1,48 @@
+.game-slider {
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  position: relative;
+}
+
+.game-slider .slider-item--active {
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.game-slider .slider-item--active img {
+  width: 70%;
+}
+
+.game-slider .slider-item {
+  border-radius: 10px;
+  opacity: 0;
+  transition: all 1s;
+}
+
+.game-slider .slider-item--active {
+  opacity: 1;
+  transition: all 1s;
+  transform: scale(1.08);
+}
+
+.game-slider .slider-arrow {
+  font-size: 2.5rem;
+  position: absolute;
+  top: 50%;
+  cursor: pointer;
+  color: #ffffff;
+  z-index: 10;
+}
+
+.game-slider .arrow-left {
+  left: 7%;
+}
+
+.game-slider .arrow-right {
+  right: 7%;
+}
