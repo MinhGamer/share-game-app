@@ -3,14 +3,14 @@
   margin-bottom: 2rem;
 }
 
-.game-item__trailer {
-  border-bottom: 1px solid #cccccc;
-  width: 100%;
+.game-item__image {
+  width: 80%;
+  margin: auto;
 }
 
-.game-item__trailer iframe {
+.game-item__image img {
   width: 100%;
-  height: 250px;
+  border-radius: 6px;
 }
 
 .game-item__info {

@@ -8,6 +8,8 @@ import Modal from '../../shared/components/UI/Modal';
 
 import GameTrailer from './GameTrailer';
 
+import GameSlider from './GameSlider';
+
 export default function GameItem(props) {
   const [showModal, setShowModal] = useState(false);
 
@@ -20,6 +22,7 @@ export default function GameItem(props) {
     publisher,
     publicYear,
     rating,
+    images,
   } = props.game;
 
   const deleteGameHandler = () => {
@@ -29,6 +32,8 @@ export default function GameItem(props) {
   const showTrailerHandler = () => {
     setShowTrailer(true);
   };
+
+  console.log('rendering');
 
   return (
     <>
@@ -52,13 +57,9 @@ export default function GameItem(props) {
 
       <div className='game-item'>
         <Card>
-          <div className='game-item__trailer'>
-            <iframe
-              title={title}
-              src='https://www.youtube.com/embed/2Rxoz13Bthc'
-              frameBorder='0'
-              allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
-              allowFullScreen></iframe>
+          <div className='game-item__image'>
+            {/* <img src={images[0]} alt='game' /> */}
+            <GameSlider images={images} />
           </div>
 
           <div>

@@ -11,6 +11,11 @@ const DUMMY_GAMES = [
     publisher: 'Activision',
     publicYear: '2004',
     rating: '8',
+    images: [
+      'https://i.gadgets360cdn.com/large/world-of-warcraft_1515269153610.jpg',
+      'https://img.pixers.pics/pho(s3:700/PI/10/06/2/700_PI10062_ae538ace086617914e8ddd4f70344041_5b7aba1e617d3_.,700,394,jpg)/stickers-world-of-warcraft.jpg.jpg',
+      'https://www.wallpaperup.com/uploads/wallpapers/2014/11/11/513346/d540ea714b78d1ad075e9f481fe0cc35-700.jpg',
+    ],
     creator: 'u1',
   },
   {
@@ -21,6 +26,11 @@ const DUMMY_GAMES = [
     publisher: 'Activision',
     publicYear: '2018',
     rating: '9',
+    images: [
+      'https://i.gadgets360cdn.com/large/world-of-warcraft_1515269153610.jpg',
+      'https://img.pixers.pics/pho(s3:700/PI/10/06/2/700_PI10062_ae538ace086617914e8ddd4f70344041_5b7aba1e617d3_.,700,394,jpg)/stickers-world-of-warcraft.jpg.jpg',
+      'https://www.wallpaperup.com/uploads/wallpapers/2014/11/11/513346/d540ea714b78d1ad075e9f481fe0cc35-700.jpg',
+    ],
     creator: 'u2',
   },
 ];
