@@ -4,11 +4,14 @@ import './GameItem.css';
 
 import Card from '../../shared/components/UI/Card';
 import Button from '../../shared/components/UI/Button';
-
 import Modal from '../../shared/components/UI/Modal';
+
+import GameTrailer from './GameTrailer';
 
 export default function GameItem(props) {
   const [showModal, setShowModal] = useState(false);
+
+  const [showTrailer, setShowTrailer] = useState(false);
 
   const {
     title,
@@ -19,18 +22,18 @@ export default function GameItem(props) {
     rating,
   } = props.game;
 
-  const closeModal = () => {
-    setShowModal(false);
-  };
-
   const deleteGameHandler = () => {
     setShowModal(true);
+  };
+
+  const showTrailerHandler = () => {
+    setShowTrailer(true);
   };
 
   return (
     <>
       {/* Delete Modal */}
-      <Modal showed={showModal} onBackdropClick={closeModal}>
+      <Modal showed={showModal} onBackdropClick={() => setShowModal(false)}>
         <div className='modal-header'>Are you sure ?</div>
         <div className='modal-content'>
           This deleted item can not be undone!! Do you want to delete anyway?
@@ -40,6 +43,12 @@ export default function GameItem(props) {
           <Button red>Confirm</Button>
         </div>
       </Modal>
+
+      {/* Trailer   */}
+      <GameTrailer
+        showed={showTrailer}
+        onBackdropClick={() => setShowTrailer(false)}
+      />
 
       <div className='game-item'>
         <Card>
@@ -63,7 +72,9 @@ export default function GameItem(props) {
 
             <p className='game-item__description'>Description: {description}</p>
           </div>
-          <Button blue>Trailer</Button>
+          <Button onClick={showTrailerHandler} blue>
+            Trailer
+          </Button>
           <Button green>Update</Button>
           <Button onClick={deleteGameHandler} red>
             Delete
