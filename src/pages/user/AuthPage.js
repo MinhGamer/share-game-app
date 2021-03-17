@@ -10,14 +10,19 @@ import {
   VALIDATOR_REQUIRE,
 } from '../../shared/util/validators';
 
+import LoadingSpinner from '../../shared/components/UI/LoadingSpinner';
+
 import useForm from '../../shared/customHooks/useForm';
+import useHttp from '../../shared/customHooks/useHttp';
 
 import './AuthPage.css';
 
 export default function AuthPage() {
+  const { sendRequest, isLoading, error, clearError } = useHttp();
+
   const [isLoginMode, setIsLoginMode] = useState(false);
 
-  const [formState, inputHandler] = useForm(
+  const [formState, inputHandler, setFormData] = useForm(
     {
       email: {
         value: '',
@@ -31,15 +36,92 @@ export default function AuthPage() {
     false
   );
 
+  const submitHandler = async (e) => {
+    e.preventDefault();
+
+    console.log(formState.inputs);
+
+    const { email, password } = formState.inputs;
+
+    if (isLoginMode) {
+      // login
+      try {
+        const res = await sendRequest(
+          '/user/login',
+          'POST',
+          JSON.stringify(formState.inputs)
+        );
+        console.log(res);
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      //sign up
+
+      const newUser = {
+        name: formState.inputs.name.value,
+        email: formState.inputs.email.value,
+        password: formState.inputs.password.value,
+      };
+
+      try {
+        const res = await sendRequest(
+          '/user/signup',
+          'POST',
+          JSON.stringify(newUser)
+        );
+
+        console.log(res);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
+
   const switchMode = (e) => {
     e.preventDefault();
+
+    //login up mode : form only have email and password
+    //sign up mode : form have one more: name input
+    if (!isLoginMode) {
+      setFormData(
+        {
+          ...formState.inputs,
+          name: undefined,
+        },
+        formState.inputs.email.isValid && formState.inputs.password.isValid
+      );
+    } else {
+      setFormData(
+        {
+          ...formState.inputs,
+          name: {
+            value: '',
+            isValid: false,
+          },
+        },
+        false
+      );
+    }
+
     setIsLoginMode((prevMode) => !prevMode);
   };
 
   return (
     <form className='auth-form'>
       <Card>
-        <h1 className='auth-form__title'>Login</h1>
+        <h1 className='auth-form__title'>Contact Form</h1>
+        {!isLoginMode && (
+          <Input
+            id='name'
+            label='Name'
+            type='text'
+            initialValue=''
+            validators={[VALIDATOR_REQUIRE()]}
+            onInput={inputHandler}
+          />
+        )}
+
         <Input
           id='email'
           label='Email'
@@ -48,6 +130,7 @@ export default function AuthPage() {
           validators={[VALIDATOR_REQUIRE(), VALIDATOR_EMAIL()]}
           onInput={inputHandler}
         />
+
         <Input
           id='password'
           label='Password'
@@ -56,7 +139,7 @@ export default function AuthPage() {
           validators={[VALIDATOR_REQUIRE(), VALIDATOR_MINLENGTH(6)]}
           onInput={inputHandler}
         />
-        <Button disabled={!formState.isValid} green>
+        <Button onClick={submitHandler} disabled={!formState.isValid} green>
           {isLoginMode ? 'Login' : 'Sign up'}
         </Button>
         <Button onClick={switchMode} red>
