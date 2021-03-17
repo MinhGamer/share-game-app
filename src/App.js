@@ -10,18 +10,22 @@ import GameSlider from './components/game/GameSlider';
 
 import UploadFile from './shared/components/FormElement/UploadFile';
 
+import { AuthContextWrapper } from './shared/context/authContext';
+
 function App() {
   return (
     <div className='app-background'>
       <div className='app-background-overlay'>
         <BrowserRouter>
-          <Header />
-          <Route path='/image-upload' exact component={UploadFile} />
-          <Route path='/auth' exact component={AuthPage} />
-          <Route path='/game-detail' exact component={GameSlider} />
-          <Route path='/' exact component={UsersPage} />
-          <Route path='/:userId/games' exact component={GamesPage} />
-          <Route path='/:userId/add-game' exact component={AddGamePage} />
+          <AuthContextWrapper>
+            <Header />
+            <Route path='/image-upload' exact component={UploadFile} />
+            <Route path='/auth' exact component={AuthPage} />
+            <Route path='/game-detail' exact component={GameSlider} />
+            <Route path='/' exact component={UsersPage} />
+            <Route path='/:userId/games' exact component={GamesPage} />
+            <Route path='/:userId/add-game' exact component={AddGamePage} />
+          </AuthContextWrapper>
         </BrowserRouter>
       </div>
     </div>

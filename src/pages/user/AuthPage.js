@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
 import Card from '../../shared/components/UI/Card';
 import Input from '../../shared/components/FormElement/Input';
@@ -10,7 +10,7 @@ import {
   VALIDATOR_REQUIRE,
 } from '../../shared/util/validators';
 
-import LoadingSpinner from '../../shared/components/UI/LoadingSpinner';
+import { AuthContext } from '../../shared/context/authContext';
 
 import useForm from '../../shared/customHooks/useForm';
 import useHttp from '../../shared/customHooks/useHttp';
@@ -19,9 +19,7 @@ import './AuthPage.css';
 
 export default function AuthPage() {
   const { sendRequest, isLoading, error, clearError } = useHttp();
-
   const [isLoginMode, setIsLoginMode] = useState(false);
-
   const [formState, inputHandler, setFormData] = useForm(
     {
       email: {
@@ -36,28 +34,39 @@ export default function AuthPage() {
     false
   );
 
+  const auth = useContext(AuthContext);
+
   const submitHandler = async (e) => {
     e.preventDefault();
-
-    console.log(formState.inputs);
 
     const { email, password } = formState.inputs;
 
     if (isLoginMode) {
       // login
+
+      const user = {
+        email: email.value,
+        password: password.value,
+      };
+
       try {
         const res = await sendRequest(
           '/user/login',
           'POST',
-          JSON.stringify(formState.inputs)
+          JSON.stringify(user)
         );
-        console.log(res);
+
+        // res: {
+        //   userId,
+        //   token,
+        // }
+
+        auth.login(res.userId, res.token);
       } catch (err) {
         console.log(err);
       }
     } else {
       //sign up
-
       const newUser = {
         name: formState.inputs.name.value,
         email: formState.inputs.email.value,
@@ -70,7 +79,7 @@ export default function AuthPage() {
           'POST',
           JSON.stringify(newUser)
         );
-
+        //get token
         console.log(res);
       } catch (err) {
         console.log(err);
@@ -106,6 +115,8 @@ export default function AuthPage() {
 
     setIsLoginMode((prevMode) => !prevMode);
   };
+
+  console.log(auth);
 
   return (
     <form className='auth-form'>

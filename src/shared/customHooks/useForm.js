@@ -45,7 +45,6 @@ const formReducer = (state, action) => {
     }
 
     case 'SET_DATA': {
-      console.log(action);
       return {
         inputs: action.inputs,
         isValid: action.isValid,
