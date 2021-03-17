@@ -1,6 +1,10 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 
 import UserList from '../../components/user/UserList';
+
+import LoadingSpinner from '../../shared/components/UI/LoadingSpinner';
+
+import useHttp from '../../shared/customHooks/useHttp';
 
 const DUMMY_USERS = [
   {
@@ -21,12 +25,23 @@ const DUMMY_USERS = [
   },
 ];
 
-export default class UsersPage extends Component {
-  render() {
-    return (
-      <div className='user-list'>
-        <UserList users={DUMMY_USERS} />
-      </div>
-    );
-  }
+export default function UsersPage() {
+  const { sendRequest, isLoading, error } = useHttp();
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      const data = await sendRequest('/user/users');
+      console.log(data);
+    };
+
+    fetchUsers();
+  });
+
+  console.log();
+
+  return (
+    <div className='user-list'>
+      <UserList users={DUMMY_USERS} />
+    </div>
+  );
 }
