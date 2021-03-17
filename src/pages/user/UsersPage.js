@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import UserList from '../../components/user/UserList';
 
 import LoadingSpinner from '../../shared/components/UI/LoadingSpinner';
+import ErrorModal from '../../shared/components/UI/ErrorModal';
 
 import useHttp from '../../shared/customHooks/useHttp';
 
@@ -26,22 +27,26 @@ const DUMMY_USERS = [
 ];
 
 export default function UsersPage() {
-  const { sendRequest, isLoading, error } = useHttp();
+  const [users, setUsers] = useState([]);
+
+  const { sendRequest, isLoading, error, clearError } = useHttp();
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const data = await sendRequest('/user/users');
-      console.log(data);
+      try {
+        const data = await sendRequest('/user/users');
+        setUsers(data.users);
+      } catch (err) {}
     };
 
     fetchUsers();
-  });
-
-  console.log();
+  }, [sendRequest]);
 
   return (
     <div className='user-list'>
-      <UserList users={DUMMY_USERS} />
+      {isLoading && <LoadingSpinner asOverlay />}
+      {error && <ErrorModal error={error} clearError={clearError} />}
+      {!isLoading && users && <UserList users={users} />}
     </div>
   );
 }
