@@ -23,7 +23,10 @@ function App() {
             <Route path='/auth' exact component={AuthPage} />
             <Route path='/game-detail' exact component={GameSlider} />
             <Route path='/' exact component={UsersPage} />
+
+            {/* fetch games by userId */}
             <Route path='/:userId/games' exact component={GamesPage} />
+
             <Route path='/:userId/add-game' exact component={AddGamePage} />
           </AuthContextWrapper>
         </BrowserRouter>

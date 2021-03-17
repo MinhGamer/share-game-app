@@ -18,11 +18,11 @@ export default function GameItem(props) {
   const {
     title,
     description,
-    developer,
-    publisher,
-    publicYear,
-    rating,
-    images,
+    // developer,
+    // publisher,
+    // publicYear,
+    // rating,
+    imageUrl,
   } = props.game;
 
   const deleteGameHandler = () => {
@@ -87,17 +87,17 @@ export default function GameItem(props) {
       <div className='game-item'>
         <Card>
           <div className='game-item__image'>
-            {/* <img src={images[0]} alt='game' /> */}
-            <GameSlider images={images} />
+            <img src={imageUrl} alt='game' />
+            {/* <GameSlider images={images} /> */}
           </div>
 
           <div>
             <div className='game-item__info'>
               <p>Title: {title || ''}</p>
-              <p>Developer: {developer || ''}</p>
+              {/* <p>Developer: {developer || ''}</p>
               <p>Publisher: {publisher || ''}</p>
               <p>Public Year: {publicYear || ''}</p>
-              <p>Rating: {rating || ''}</p>
+              <p>Rating: {rating || ''}</p> */}
             </div>
 
             <p className='game-item__description'>Description: {description}</p>

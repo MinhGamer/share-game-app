@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom';
 import './UserItem.css';
 
 export default function UserItem(props) {
-  const { name } = props.user;
+  const { name, userId } = props.user;
 
   return (
     <div className='user-item'>
-      <Link to='/u1/games'>
+      <Link to={`/${userId}/games`}>
         <img
           src='https://i.pinimg.com/originals/be/f7/6c/bef76c4b9aff3ae24c434cab115f69ad.jpg'
           alt='game'

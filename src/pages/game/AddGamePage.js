@@ -1,6 +1,4 @@
-import React from 'react';
-
-// import GameItem from '../../components/game/GameItem';
+import React, { useContext } from 'react';
 
 import Input from '../../shared/components/FormElement/Input';
 import Card from '../../shared/components/UI/Card';
@@ -15,17 +13,40 @@ import {
 
 import './AddGame.css';
 
+import useHttp from '../../shared/customHooks/useHttp';
+
+import { AuthContext } from '../../shared/context/authContext';
+
 export default function AddGamePage(props) {
+  const auth = useContext(AuthContext);
+  const { sendRequest, isLoading, error, clearError } = useHttp();
   const [formState, inputHandler] = useForm(
     {
       title: { value: '', isValid: false },
-      developer: { value: '', isValid: false },
+      description: { value: '', isValid: false },
     },
     false
   );
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
+
+    console.log(formState.inputs);
+
+    const newGame = {
+      title: formState.inputs.title.value,
+      description: formState.inputs.description.value,
+      creatorId: auth.userId,
+    };
+    console.log(newGame);
+
+    try {
+      const data = await sendRequest('game', 'POST', JSON.stringify(newGame));
+
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (

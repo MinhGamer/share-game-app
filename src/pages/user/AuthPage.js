@@ -33,7 +33,6 @@ export default function AuthPage() {
     },
     false
   );
-
   const auth = useContext(AuthContext);
 
   const submitHandler = async (e) => {
@@ -60,6 +59,8 @@ export default function AuthPage() {
         //   userId,
         //   token,
         // }
+
+        console.log(res);
 
         auth.login(res.userId, res.token);
       } catch (err) {
@@ -115,8 +116,6 @@ export default function AuthPage() {
 
     setIsLoginMode((prevMode) => !prevMode);
   };
-
-  console.log(auth);
 
   return (
     <form className='auth-form'>
